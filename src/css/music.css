@@ -20,16 +20,29 @@
   overflow: auto;
 }
 .music img {
-  user-select: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 .music header {
-  user-select: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 .music header .music-backButton {
   width: 5rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   color: #FA2D48;
   margin: 2.25rem 0 1rem 1.9rem;
   cursor: pointer;
@@ -41,9 +54,15 @@
   color: #055090;
 }
 .music header .music-header-title {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 .music header .music-header-title h1 {
   letter-spacing: 1px;
@@ -57,9 +76,15 @@
   border-radius: 100rem;
   width: 2.25rem;
   height: 2.25rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   margin-right: 3.35rem;
   margin-top: 0.4rem;
   cursor: pointer;
@@ -68,13 +93,20 @@
   color: white;
 }
 .music article {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   margin: 1.6rem 0 2.7rem 3.45rem;
 }
 .music article .music-favoriteSong {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   color: white;
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 .music article .music-favoriteSong h2 {
   font-size: 1.55em;
@@ -83,8 +115,13 @@
   margin-bottom: 0.7rem;
 }
 .music article .music-favoriteSong > a {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: row;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
   min-width: 23rem;
   color: inherit;
   cursor: pointer;
@@ -94,9 +131,16 @@
   border-radius: 0.6rem;
 }
 .music article .music-favoriteSong > a > div {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   margin-left: 1rem;
 }
 .music article .music-favoriteSong > a > div > div {
@@ -129,9 +173,15 @@
 }
 .music article .music-favoriteSong > a > div .open {
   margin-bottom: 1.5rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   text-align: center;
   background-color: #1C1C1C;
   width: 4.75rem;
@@ -139,14 +189,23 @@
   font-size: 1em;
   border-radius: 100rem;
   cursor: pointer;
-  user-select: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  -webkit-transition: background-color 0.25s, color 0.25s linear;
   transition: background-color 0.25s, color 0.25s linear;
   color: #FA2D48;
   font-family: "SFSB", -apple-system, BlinkMacSystemFont, sans-serif;
 }
 .music article .music-featuredSongs {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   color: white;
   margin-left: 4.4rem;
   min-width: 0;
@@ -173,8 +232,12 @@
   display: none;
 }
 .music article .music-featuredSongs .featuredSongs-grid .song {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   width: 100%;
   padding: 0;
   border: 0;
@@ -189,16 +252,24 @@
   width: 52px;
   height: 52px;
   border-radius: 0.5rem;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   margin-right: 1.1rem;
 }
 .music article .music-featuredSongs .featuredSongs-grid .song .meta {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   overflow: hidden;
   height: 100%;
   width: 100%;
-  justify-content: space-between;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   border-top: 1px solid #252527 !important;
   margin-right: 1.35rem;
 }
@@ -233,10 +304,16 @@
   margin-bottom: 0.9rem;
 }
 .music .music-favoriteArtists .artists-row {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: row;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
   gap: 1.625rem;
-  flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
   overflow-x: scroll;
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -248,8 +325,13 @@
   padding-bottom: 0.2rem;
 }
 .music .music-favoriteArtists .artists-row .artist {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   text-decoration: none;
   color: inherit;
   cursor: pointer;
@@ -258,7 +340,8 @@
   width: 151.7px;
   height: 151.7px;
   border-radius: 100rem;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .music .music-favoriteArtists .artists-row .artist .artist-name {
   width: 151.7px;
@@ -283,10 +366,16 @@
   margin-bottom: 0.9rem;
 }
 .music .music-playlists .playlists-row {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: row;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
   gap: 1.625rem;
-  flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
   overflow-x: scroll;
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -298,9 +387,16 @@
   padding-bottom: 0.2rem;
 }
 .music .music-playlists .playlists-row .playlist {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
   text-decoration: none;
   color: inherit;
   cursor: pointer;
@@ -309,7 +405,8 @@
   width: 185px;
   height: 185px;
   border-radius: 0.5rem;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .music .music-playlists .playlists-row .playlist .meta {
   margin-top: 0.45rem;
@@ -332,13 +429,22 @@
   -webkit-backdrop-filter: blur(20px) brightness(20%);
   pointer-events: none;
   z-index: 0;
-  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgb(0, 0, 0) 30%);
-  mask-repeat: no-repeat;
-  mask-size: 100% 100%;
+  -webkit-mask-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0)), color-stop(30%, rgb(0, 0, 0)));
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgb(0, 0, 0) 30%);
+          mask-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0)), color-stop(30%, rgb(0, 0, 0)));
+          mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgb(0, 0, 0) 30%);
+  -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+          mask-size: 100% 100%;
 }
 .music .music-nowPlaying {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  justify-content: space-between;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   cursor: default;
   width: calc(100% - 5.5rem);
   border-radius: 0.8rem;
@@ -356,37 +462,62 @@
   margin-right: 1.55rem;
   height: 26.5px;
   width: auto;
-  align-self: center;
-  flex: 0 0 auto;
+  -ms-flex-item-align: center;
+      align-self: center;
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 auto;
+          flex: 0 0 auto;
 }
 .music .music-nowPlaying img.playingControlsBadge {
   margin-right: 1.5rem;
   height: 30px;
   width: auto;
-  align-self: center;
-  flex: 0 0 auto;
+  -ms-flex-item-align: center;
+      align-self: center;
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 auto;
+          flex: 0 0 auto;
 }
 .music .music-nowPlaying > div {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   margin-left: 0.7rem;
-  flex: 1 1 auto;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
   min-width: 0;
 }
 .music .music-nowPlaying > div img {
   width: 47.5px;
   height: 47.5px;
   border-radius: 0.5rem;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .music .music-nowPlaying > div > div {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   margin-left: 0.55rem;
   height: 100%;
-  flex: 1 1 auto;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
   min-width: 0;
   overflow: hidden;
 }
@@ -424,7 +555,10 @@
   }
   .music article {
     margin: 1.6rem 0 2.7rem 1.25rem;
-    flex-direction: column;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
   }
   .music article .music-favoriteSong {
     overflow: hidden;
@@ -498,6 +632,4 @@
     width: calc(100% - 1.2rem);
     margin: 0 0.6rem 0.5rem 0.6rem;
   }
-}
-
-/*# sourceMappingURL=music.css.map */
+}/*# sourceMappingURL=music.css.map */
