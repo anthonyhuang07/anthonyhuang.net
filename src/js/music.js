@@ -1,4 +1,4 @@
-const MUSIC_DATA_URL = 'https://anthonyhuang.net/api/music';
+const MUSIC_DATA_URL = 'https://anthonyhuang.net/api/music'; // Music API URL
 let musicData = null;
 let musicDataPromise = null;
 const youtubeMusicSearchUrl = (title, artist) =>
