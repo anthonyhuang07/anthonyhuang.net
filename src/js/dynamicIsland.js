@@ -60,7 +60,7 @@ function updateDynamicIsland(data) {
       if (data.status && data.status.type === "LISTENING") {
         musicPlaying = true;
         let imageUrl = data.status?.assets?.largeImage;
-        if (typeof imageUrl !== 'string' || imageUrl.length === 0) {
+        if (typeof imageUrl !== 'string' || imageUrl.trim().length === 0) {
           imageUrl = '/assets/icons/defaultMusic.webp';
         }
         let songName = data.status.details;
@@ -93,30 +93,38 @@ function updateDynamicIsland(data) {
         if (imageUrl !== currentAlbumArtUrl) {
           dynamicIsland.classList.remove('ready');
           currentAlbumArtUrl = imageUrl;
-        }
 
-        albumArt.forEach(img => {
-          img.crossOrigin = "Anonymous";
-          img.src = imageUrl;
-          
-          img.onload = () => {
-            colorBars(img);
-            dynamicIsland.classList.add('ready');
-          };
+          albumArt.forEach(img => {
+            img.crossOrigin = "Anonymous";
 
-          img.onerror = () => {
-            console.error('Error loading album art image');
-            img.src = '/assets/icons/defaultMusic.webp';
             img.onload = () => {
-              const bars = document.querySelectorAll('.bar');
-              bars.forEach(bar => {
-                bar.style.backgroundColor = '#ffffff';
-                bar.style.backgroundImage = 'none';
-              });
+              if (img.getAttribute('src') === '/assets/icons/defaultMusic.webp') {
+                dynamicIsland.querySelectorAll('.bar').forEach(bar => {
+                  bar.style.backgroundColor = '#ffffff';
+                  bar.style.backgroundImage = 'none';
+                });
+              } else {
+                colorBars(img);
+              }
               dynamicIsland.classList.add('ready');
             };
+
+            img.onerror = () => {
+              img.onerror = null;
+              img.src = '/assets/icons/defaultMusic.webp';
+            };
+            img.src = '/assets/icons/defaultMusic.webp';
+          });
+
+          const artwork = new Image();
+          artwork.crossOrigin = 'Anonymous';
+          artwork.onload = () => {
+            if (currentAlbumArtUrl === imageUrl) {
+              albumArt.forEach(img => img.src = imageUrl);
+            }
           };
-        });
+          artwork.src = imageUrl;
+        }
 
         songNameElement.textContent = songName;
         artistNameElement.textContent = artistName;

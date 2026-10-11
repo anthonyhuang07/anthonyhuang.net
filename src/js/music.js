@@ -244,7 +244,10 @@ function renderNowPlaying(data) {
   let playback = { playing: false };
 
   if (status?.type === 'LISTENING') {
-    let imageUrl = status.assets?.largeImage || '/assets/icons/defaultMusic.webp';
+    let imageUrl = status.assets?.largeImage;
+    if (typeof imageUrl !== 'string' || imageUrl.trim().length === 0) {
+      imageUrl = '/assets/icons/defaultMusic.webp';
+    }
     if (imageUrl.startsWith('mp:external/')) {
       imageUrl = `https://${imageUrl.split('/https/').pop()}`;
     }
@@ -264,10 +267,12 @@ function renderNowPlaying(data) {
   currentNowPlaying = playback;
   currentNowPlayingKey = stateKey;
   nowPlayingBar.classList.remove('searchable');
+  nowPlayingArt.onload = null;
+  nowPlayingArt.onerror = null;
+  nowPlayingArt.src = '/assets/icons/defaultMusic.webp';
   nowPlayingBar.querySelectorAll('.notPlayingBadge, .playingControlsBadge').forEach(badge => badge.remove());
 
   if (!playback.playing) {
-    nowPlayingArt.src = '/assets/icons/defaultMusic.webp';
     nowPlayingText.innerHTML = '<p>Not Playing</p>';
   } else {
     nowPlayingText.innerHTML = `
@@ -277,17 +282,24 @@ function renderNowPlaying(data) {
     nowPlayingText.querySelector('.music-nowPlaying-song').textContent = playback.song;
     nowPlayingText.querySelector('.music-nowPlaying-artist').textContent = playback.artist;
 
-    const usesDefaultArt = new URL(playback.imageUrl, window.location.href).pathname === '/assets/icons/defaultMusic.webp';
     nowPlayingArt.onload = () => {
+      const usesDefaultArt = new URL(nowPlayingArt.src, window.location.href).pathname === '/assets/icons/defaultMusic.webp';
       if (!usesDefaultArt && currentNowPlayingKey === stateKey) {
         nowPlayingBar.classList.add('searchable');
       }
     };
     nowPlayingArt.onerror = () => {
       nowPlayingBar.classList.remove('searchable');
+      nowPlayingArt.onload = null;
+      nowPlayingArt.onerror = null;
       nowPlayingArt.src = '/assets/icons/defaultMusic.webp';
     };
-    nowPlayingArt.src = playback.imageUrl;
+    // Keep the default visible while remote artwork loads or stalls.
+    const artwork = new Image();
+    artwork.onload = () => {
+      if (currentNowPlayingKey === stateKey) nowPlayingArt.src = playback.imageUrl;
+    };
+    artwork.src = playback.imageUrl;
   }
 
   const badge = document.createElement('img');

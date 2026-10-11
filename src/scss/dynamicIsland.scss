@@ -22,6 +22,7 @@
     justify-content: space-between;
 
     .island-albumArt.closed {
+      width: 22.5px;
       height: 22.5px;
       margin-left: 0.625rem;
       border-radius: 0.3rem;
@@ -171,6 +172,7 @@
             min-width: 0; // allow text to shrink for ellipsis
 
             .island-albumArt.open {
+              width: 67.5px;
               height: 67.5px;
               margin-left: 0;
               border-radius: 0.8rem;

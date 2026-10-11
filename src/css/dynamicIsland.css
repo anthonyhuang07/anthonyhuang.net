@@ -47,6 +47,7 @@
           justify-content: space-between;
 }
 #dynamicIsland #island-closed .island-albumArt.closed {
+  width: 22.5px;
   height: 22.5px;
   margin-left: 0.625rem;
   border-radius: 0.3rem;
@@ -228,6 +229,7 @@
   min-width: 0;
 }
 #dynamicIsland.playing:not(.hover-locked):hover #island-open #island-main #island-main-left .island-albumArt.open, #dynamicIsland.playing:not(.hover-locked):active #island-open #island-main #island-main-left .island-albumArt.open, #dynamicIsland.playing.expanded #island-open #island-main #island-main-left .island-albumArt.open {
+  width: 67.5px;
   height: 67.5px;
   margin-left: 0;
   border-radius: 0.8rem;
