@@ -11,9 +11,6 @@ let frozenPlayback = null;
 let frozenSessionId = null;
 let currentAlbumArtUrl = null;
 
-const canvas = document.createElement('canvas');
-const ctx = canvas.getContext('2d');
-
 let hoverUnlockTimer = null;
 
 function unlockDynamicIslandHover() {
@@ -95,16 +92,11 @@ function updateDynamicIsland(data) {
           currentAlbumArtUrl = imageUrl;
 
           albumArt.forEach(img => {
-            img.crossOrigin = "Anonymous";
-
             img.onload = () => {
               if (img.getAttribute('src') === '/assets/icons/defaultMusic.webp') {
-                dynamicIsland.querySelectorAll('.bar').forEach(bar => {
-                  bar.style.backgroundColor = '#ffffff';
-                  bar.style.backgroundImage = 'none';
-                });
+                dynamicIsland.style.removeProperty('--album-art');
               } else {
-                colorBars(img);
+                dynamicIsland.style.setProperty('--album-art', `url(${JSON.stringify(img.src)})`);
               }
               dynamicIsland.classList.add('ready');
             };
@@ -117,7 +109,6 @@ function updateDynamicIsland(data) {
           });
 
           const artwork = new Image();
-          artwork.crossOrigin = 'Anonymous';
           artwork.onload = () => {
             if (currentAlbumArtUrl === imageUrl) {
               albumArt.forEach(img => img.src = imageUrl);
@@ -175,46 +166,6 @@ function formatTime(ms) {
   let minutes = Math.floor(totalSeconds / 60);
   let seconds = totalSeconds % 60;
   return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-}
-
-function colorBars(imgElement) { // Fill in bars with blurred album art
-  const bars = document.querySelectorAll('.bar');
-
-  canvas.width = imgElement.naturalWidth;
-  canvas.height = imgElement.naturalHeight;
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  ctx.drawImage(imgElement, 0, 0, canvas.width, canvas.height);
-
-  const blurAmount = Math.max(15, canvas.width / 10);
-
-  ctx.globalAlpha = 1;
-  ctx.filter = `blur(${blurAmount}px)`;
-  ctx.drawImage(canvas, 0, 0, canvas.width, canvas.height);
-  ctx.filter = 'none';
-
-  bars.forEach((bar, index) => {
-    const barCanvas = document.createElement('canvas');
-    const barCtx = barCanvas.getContext('2d');
-    barCanvas.width = canvas.width / bars.length * 1.2;
-    barCanvas.height = canvas.height * 0.6;
-
-    barCtx.drawImage(
-      canvas,
-      index * barCanvas.width * 0.8,
-      canvas.height * 0.2,
-      barCanvas.width,
-      barCanvas.height,
-      0,
-      0,
-      barCanvas.width,
-      barCanvas.height
-    );
-
-    bar.style.backgroundImage = `url(${barCanvas.toDataURL()})`;
-    bar.style.backgroundSize = 'cover';
-    bar.style.backgroundPosition = 'center';
-  });
 }
 
 document.addEventListener('musicstatuschange', event => updateDynamicIsland(event.detail));

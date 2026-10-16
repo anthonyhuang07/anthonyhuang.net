@@ -89,6 +89,8 @@
   font-size: 0;
 }
 #dynamicIsland .island-audioPreview .bar {
+  position: relative;
+  overflow: hidden;
   width: 2px;
   height: 2px;
   background-color: #ffffff;
@@ -96,27 +98,43 @@
   -webkit-animation: wave 0.75s infinite ease-in-out;
           animation: wave 0.75s infinite ease-in-out;
 }
+#dynamicIsland .island-audioPreview .bar::before {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  background-image: var(--album-art, none);
+  background-size: 600% 100%;
+  background-position: var(--art-position) center;
+  -webkit-filter: blur(4px);
+          filter: blur(4px);
+}
 #dynamicIsland .island-audioPreview .bar:nth-child(1) {
+  --art-position: 0%;
   -webkit-animation-delay: 0.4s;
           animation-delay: 0.4s;
 }
 #dynamicIsland .island-audioPreview .bar:nth-child(2) {
+  --art-position: 20%;
   -webkit-animation-delay: 0.2s;
           animation-delay: 0.2s;
 }
 #dynamicIsland .island-audioPreview .bar:nth-child(3) {
+  --art-position: 40%;
   -webkit-animation-delay: -0.4s;
           animation-delay: -0.4s;
 }
 #dynamicIsland .island-audioPreview .bar:nth-child(4) {
+  --art-position: 60%;
   -webkit-animation-delay: 0.2s;
           animation-delay: 0.2s;
 }
 #dynamicIsland .island-audioPreview .bar:nth-child(5) {
+  --art-position: 80%;
   -webkit-animation-delay: 0.6s;
           animation-delay: 0.6s;
 }
 #dynamicIsland .island-audioPreview .bar:nth-child(6) {
+  --art-position: 100%;
   -webkit-animation-delay: -0.6s;
           animation-delay: -0.6s;
 }
@@ -550,4 +568,6 @@
   100% {
     opacity: 0;
   }
-}/*# sourceMappingURL=dynamicIsland.css.map */
+}
+
+/*# sourceMappingURL=dynamicIsland.css.map */
