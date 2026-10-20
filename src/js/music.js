@@ -109,7 +109,7 @@ async function renderFavoriteSong(details) {
   const container = document.querySelector('.music-favoriteSong');
 
   const albumArt =
-    details.albumArt ??
+    details.albumArt?.trim() ||
     (await resolveAlbumArt(details.title, details.artist));
 
   container.innerHTML = `
@@ -138,9 +138,7 @@ async function renderFeaturedSongs(songs = []) {
 
   const resolvedSongs = await Promise.all(
     songs.map(async (song) => {
-      if (song.albumArt) return song;
-
-      const albumArt = await resolveAlbumArt(song.title, song.artist);
+      const albumArt = song.albumArt?.trim() || await resolveAlbumArt(song.title, song.artist);
       return { ...song, albumArt };
     })
   );
