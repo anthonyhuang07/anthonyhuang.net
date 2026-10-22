@@ -310,7 +310,7 @@ function renderNowPlaying(data) {
 
 document.addEventListener('musicstatuschange', event => renderNowPlaying(event.detail));
 
-function loadPlaybackStatus() {
+function loadPlaybackStatus() { // load music status from api
   fetch('https://anthonyhuang.net/api/status')
     .then(response => response.json())
     .then(data => document.dispatchEvent(new CustomEvent('musicstatuschange', { detail: data })))
