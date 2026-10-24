@@ -105,6 +105,55 @@ async function resolveAlbumArt(title, artist) {
 
 // #region Favorite Song
 
+const musicHistoryDialog = document.getElementById('music-history');
+const closeMusicHistory = () => {
+  musicHistoryDialog.classList.remove('is-visible');
+  if (musicHistoryDialog.open && getComputedStyle(musicHistoryDialog).opacity === '0') musicHistoryDialog.close();
+};
+musicHistoryDialog.querySelector('.music-history-close').addEventListener('click', closeMusicHistory);
+musicHistoryDialog.addEventListener('keydown', event => {
+  if (event.key === 'Escape') event.stopPropagation();
+});
+musicHistoryDialog.addEventListener('cancel', event => {
+  event.preventDefault();
+  closeMusicHistory();
+});
+musicHistoryDialog.addEventListener('click', event => {
+  if (event.target !== musicHistoryDialog) return;
+  const bounds = musicHistoryDialog.getBoundingClientRect();
+  if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) {
+    closeMusicHistory();
+  }
+});
+musicHistoryDialog.addEventListener('transitionend', event => {
+  if (event.target === musicHistoryDialog && event.propertyName === 'opacity' && !musicHistoryDialog.classList.contains('is-visible')) {
+    musicHistoryDialog.close();
+  }
+});
+musicHistoryDialog.addEventListener('close', closeMusicHistory);
+
+function renderPastObsessions(songs = []) {
+  const list = musicHistoryDialog.querySelector('.music-history-list');
+  const template = document.getElementById('music-history-song-template');
+  const entries = Array.isArray(songs) ? songs : [];
+  list.replaceChildren();
+  musicHistoryDialog.querySelector('.music-history-empty').hidden = entries.length > 0;
+
+  entries.forEach(song => {
+    const row = template.content.cloneNode(true);
+    row.querySelector('a').href = songUrl(song);
+    row.querySelector('.date').textContent = song.favoriteDate || '';
+    row.querySelector('.title').textContent = song.title || '';
+    row.querySelector('.artist').textContent = song.artist || '';
+    const image = row.querySelector('img');
+    image.addEventListener('error', () => {
+      image.src = '/assets/icons/defaultMusic.webp';
+    }, { once: true });
+    image.src = song.albumArt?.trim() || song.art || '/assets/icons/defaultMusic.webp';
+    list.append(row);
+  });
+}
+
 async function renderFavoriteSong(details) {
   const container = document.querySelector('.music-favoriteSong');
 
@@ -113,7 +162,14 @@ async function renderFavoriteSong(details) {
     (await resolveAlbumArt(details.title, details.artist));
 
   container.innerHTML = `
-    <h2>Current Obsession</h2>
+    <div class="music-favoriteSong-title">
+      <h2>Current Obsession</h2>
+      <button type="button" class="music-history-button" aria-label="View past obsessions" aria-haspopup="dialog" aria-controls="music-history">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M3 12a9 9 0 1 0 2.6-6.4L3 8M3 3v5h5M12 7v5l4 2" />
+        </svg>
+      </button>
+    </div>
     <a href="${songUrl(details)}" target="_blank" rel="noopener noreferrer" aria-label="Open ${details.title} by ${details.artist}">
       <img src="${albumArt ?? '/img/placeholder.png'}" />
       <div>
@@ -127,6 +183,12 @@ async function renderFavoriteSong(details) {
       </div>
     </a>
   `;
+  container.querySelector('.music-history-button').addEventListener('click', () => {
+    musicHistoryDialog.showModal();
+    // Commit the starting style before transitioning in.
+    musicHistoryDialog.getBoundingClientRect();
+    musicHistoryDialog.classList.add('is-visible');
+  });
 }
 
 // #endregion
@@ -326,6 +388,7 @@ document.addEventListener("DOMContentLoaded", () => {
   loadMusicData()
     .then((data) => {
       renderFavoriteSong(data.favoriteSong);
+      renderPastObsessions(data.pastObsessions);
       renderFeaturedSongs(data.featuredSongs);
       renderFavoriteArtists(data.favoriteArtists);
       renderPlaylists(data.playlists);

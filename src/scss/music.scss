@@ -3,6 +3,10 @@
 .music {
   overflow: auto;
 
+  &:has(.music-history[open]) {
+    overflow: hidden;
+  }
+
   img {
     user-select: none;
   }
@@ -68,6 +72,17 @@
       display: flex;
       color: white;
       flex-direction: column;
+
+      .music-favoriteSong-title {
+        display: flex;
+        align-items: center;
+        gap: 0.65rem;
+        margin-bottom: 0.7rem;
+
+        h2 {
+          margin-bottom: 0;
+        }
+      }
 
       h2 {
         font-size: 1.55em;
@@ -459,6 +474,163 @@
       }
     }
   }
+}
+
+.music-history-button,
+.music-history-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  padding: 0;
+  background: none;
+  cursor: pointer;
+
+  svg {
+    width: 24px;
+    height: 24px;
+    pointer-events: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+}
+
+.music-history-button {
+  color: $musicRed;
+  flex: 0 0 24px;
+  height: 24px;
+}
+
+.music-history {
+  position: fixed;
+  overflow: hidden;
+  inset: 0;
+  margin: auto;
+  width: min(480px, calc(100vw - 2rem));
+  height: min(680px, calc(100dvh - 4rem));
+  max-width: none;
+  max-height: none;
+  padding: 0;
+  border: 0;
+  border-radius: 26px;
+  background: $appleDarkGray;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+
+  &.is-visible {
+    opacity: 1;
+    transform: none;
+
+    &::backdrop {
+      opacity: 1;
+    }
+  }
+
+  &::backdrop {
+    background: rgba(0, 0, 0, 0.451);
+    opacity: 0;
+    transition: opacity .3s ease-out;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &,
+    &::backdrop {
+      transition-duration: 1ms;
+    }
+  }
+}
+
+.music-history-content {
+  position: absolute;
+  inset: 56px 0 0;
+  overflow-y: auto;
+  padding: 8px 24px 24px;
+  color: white;
+
+  h2 {
+    font-family: $SFSB;
+    font-size: 1.55rem;
+    margin-bottom: 16px;
+  }
+}
+
+.music-history-list {
+  list-style: none;
+
+  > li:first-child .meta {
+    border-top: 0;
+  }
+
+  .music-history-song {
+    display: flex;
+    align-items: center;
+    gap: 1.1rem;
+    color: inherit;
+    cursor: pointer;
+
+    img {
+      width: 52px;
+      height: 52px;
+      flex-shrink: 0;
+      border-radius: 0.5rem;
+      object-fit: cover;
+    }
+
+    .meta {
+      flex: 1;
+      min-width: 0;
+      padding: 12px 0;
+      border-top: 1px solid rgba($appleGray, 0.3);
+
+      p {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+
+    .date {
+      color: $appleGray;
+      font-family: $SFSB;
+      font-size: 0.75rem;
+      letter-spacing: 0.3px;
+      margin-bottom: 2px;
+    }
+
+    .title {
+      font-family: $SFL;
+      font-size: 1.1rem;
+      letter-spacing: 0.6px;
+    }
+
+    .artist {
+      color: $appleGray;
+      font-family: $SFL;
+      font-size: 0.9rem;
+      letter-spacing: 0.6px;
+      margin-top: 2px;
+    }
+  }
+}
+
+.music-history-empty {
+  color: $appleGray;
+  font-family: $SFL;
+}
+
+.music-history-close {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 48px;
+  height: 48px;
+  color: white;
 }
 
 @media screen and (max-width: 600px) {  // Mobile Optimization

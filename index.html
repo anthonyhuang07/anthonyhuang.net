@@ -46,7 +46,7 @@ permalink: /
       "knowsAbout": [
         "Software Development",
         "Web Development",
-        "Cybersecurity",
+        "Geographic Information Systems",
         "Computer Science"
       ],
       "affiliation": {
@@ -222,6 +222,30 @@ permalink: /
       </article>
       <div class="music-favoriteArtists"></div>
       <div class="music-playlists"></div>
+      <dialog id="music-history" class="music-history" aria-labelledby="music-history-title">
+        <button type="button" class="music-history-close" aria-label="Close history">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <path d="m5 5 14 14M19 5 5 19" />
+          </svg>
+        </button>
+        <div class="music-history-content">
+          <h2 id="music-history-title">Past Obsessions</h2>
+          <p class="music-history-empty" hidden>No past obsessions yet.</p>
+          <ul class="music-history-list"></ul>
+          <template id="music-history-song-template">
+            <li>
+              <a class="music-history-song" target="_blank" rel="noopener noreferrer">
+                <img src="/assets/icons/defaultMusic.webp" alt="" loading="lazy" />
+                <div class="meta">
+                  <p class="date"></p>
+                  <p class="title"></p>
+                  <p class="artist"></p>
+                </div>
+              </a>
+            </li>
+          </template>
+        </div>
+      </dialog>
       <div class="music-nowPlayingBackground"></div>
       <div class="music-nowPlaying">
         <div>
